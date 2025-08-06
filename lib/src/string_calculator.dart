@@ -5,10 +5,15 @@ abstract class StringCalculator {
 class StringCalculatorImpl implements StringCalculator {
   @override
   int add(String text) {
-    String formattedText = text.replaceAll('\n', ',');
+    String delimiter = ',';
+    if (text.startsWith('//')) {
+      delimiter = text.substring(2, text.indexOf('\n'));
+      text = text.substring(text.indexOf('\n') + 1);
+    }
+    String formattedText = text.replaceAll('\n', delimiter);
 
-    if (formattedText.contains(',')) {
-      final numbers = formattedText.split(',');
+    if (formattedText.contains(delimiter)) {
+      final numbers = formattedText.split(delimiter);
       return numbers.map(_parseNumber).reduce((a, b) => a + b);
     }
 

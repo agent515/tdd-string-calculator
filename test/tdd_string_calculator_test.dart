@@ -68,5 +68,13 @@ void main() {
       expect(stringCalculator.add('1\n2,3\n'), 1 + 2 + 3);
       expect(stringCalculator.add('23,42\n2,12\n'), 23 + 42 + 2 + 12);
     });
+
+    test(
+        'should return back the sum of multiple numbers when a custom delimiter is used by passing it on the first line',
+        () {
+      expect(stringCalculator.add('//;\n1;2'), 1 + 2);
+      expect(stringCalculator.add('//,\n1,2,3,'), 1 + 2 + 3);
+      expect(stringCalculator.add('//|\n23|42|2|12|'), 23 + 42 + 2 + 12);
+    });
   });
 }
