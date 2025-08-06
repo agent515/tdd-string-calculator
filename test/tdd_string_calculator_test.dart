@@ -24,5 +24,12 @@ void main() {
       expect(() => stringCalculator.add(','), throwsA(isA<ArgumentError>()));
       expect(() => stringCalculator.add('B'), throwsA(isA<ArgumentError>()));
     });
+
+    test(
+        'should return back the same number when a single number of multiple digits is passed',
+        () {
+      expect(stringCalculator.add('1000'), 1000);
+      expect(stringCalculator.add('3123'), 3123);
+    });
   });
 }
