@@ -12,5 +12,12 @@ void main() {
     test('should return 0 on passing empty string', () {
       expect(stringCalculator.add(''), 0);
     });
+
+    test(
+        'should return back the same number when only a single number of one digit is passed',
+        () {
+      expect(stringCalculator.add('1'), 1);
+      expect(stringCalculator.add('5'), 5);
+    });
   });
 }
