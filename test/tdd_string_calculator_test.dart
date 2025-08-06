@@ -45,5 +45,13 @@ void main() {
       expect(stringCalculator.add('23,4'), 23 + 4);
       expect(stringCalculator.add('23,42,2,12'), 23 + 42 + 2 + 12);
     });
+
+    test(
+        'should throw an Argument Error when a negative number is passed in a comma separated string',
+        () {
+      expect(() => stringCalculator.add('2,-3'), throwsA(isA<ArgumentError>()));
+      expect(() => stringCalculator.add('23,42,-2,12'),
+          throwsA(isA<ArgumentError>()));
+    });
   });
 }
