@@ -5,10 +5,6 @@ abstract class StringCalculator {
 class StringCalculatorImpl implements StringCalculator {
   @override
   int add(String text) {
-    if (text.isEmpty) {
-      return 0;
-    }
-
     String formattedText = text.replaceAll('\n', ',');
 
     if (formattedText.contains(',')) {
@@ -20,6 +16,10 @@ class StringCalculatorImpl implements StringCalculator {
   }
 
   int _parseNumber(String text) {
+    if (text.isEmpty) {
+      return 0;
+    }
+
     if (!_isNumeric(text)) {
       throw ArgumentError('Invalid input: $text');
     }
