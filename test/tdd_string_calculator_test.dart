@@ -36,5 +36,14 @@ void main() {
       expect(() => stringCalculator.add('-12'), throwsA(isA<ArgumentError>()));
       expect(() => stringCalculator.add('-3'), throwsA(isA<ArgumentError>()));
     });
+
+    test(
+        'should return back the sum of multiple numbers when they are passed as a comma separated string',
+        () {
+      expect(stringCalculator.add('2,3'), 5);
+      expect(stringCalculator.add('0,4'), 4);
+      expect(stringCalculator.add('23,4'), 23 + 4);
+      expect(stringCalculator.add('23,42,2,12'), 23 + 42 + 2 + 12);
+    });
   });
 }

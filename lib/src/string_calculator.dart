@@ -9,6 +9,15 @@ class StringCalculatorImpl implements StringCalculator {
       return 0;
     }
 
+    if (text.contains(',')) {
+      final numbers = text.split(',');
+      return numbers.map(_parseNumber).reduce((a, b) => a + b);
+    }
+
+    return _parseNumber(text);
+  }
+
+  int _parseNumber(String text) {
     if (!_isNumeric(text)) {
       throw ArgumentError('Invalid input: $text');
     }
