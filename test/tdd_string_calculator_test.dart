@@ -19,5 +19,10 @@ void main() {
       expect(stringCalculator.add('1'), 1);
       expect(stringCalculator.add('5'), 5);
     });
+
+    test('should throw an Argument Error when just non-number is passed', () {
+      expect(() => stringCalculator.add(','), throwsA(isA<ArgumentError>()));
+      expect(() => stringCalculator.add('B'), throwsA(isA<ArgumentError>()));
+    });
   });
 }
