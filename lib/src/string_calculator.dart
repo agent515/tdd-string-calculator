@@ -9,13 +9,21 @@ class StringCalculatorImpl implements StringCalculator {
       return 0;
     }
 
-    if (!_isDigit(text)) {
+    if (!_isNumeric(text)) {
       throw ArgumentError('Invalid input: $text');
+    }
+
+    if (_isNegative(text)) {
+      throw ArgumentError('Negative numbers are not allowed: $text');
     }
     return int.parse(text);
   }
 
-  bool _isDigit(String character) {
+  bool _isNumeric(String character) {
     return RegExp(r'^-?\d+$').hasMatch(character);
+  }
+
+  bool _isNegative(String character) {
+    return character.startsWith('-');
   }
 }

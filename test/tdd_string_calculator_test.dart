@@ -31,5 +31,10 @@ void main() {
       expect(stringCalculator.add('1000'), 1000);
       expect(stringCalculator.add('3123'), 3123);
     });
+
+    test('should throw an Argument Error when a negative number is passed', () {
+      expect(() => stringCalculator.add('-12'), throwsA(isA<ArgumentError>()));
+      expect(() => stringCalculator.add('-3'), throwsA(isA<ArgumentError>()));
+    });
   });
 }
