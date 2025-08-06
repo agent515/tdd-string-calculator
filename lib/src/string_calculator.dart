@@ -9,12 +9,14 @@ class StringCalculatorImpl implements StringCalculator {
       return 0;
     }
 
-    if (text.contains(',')) {
-      final numbers = text.split(',');
+    String formattedText = text.replaceAll('\n', ',');
+
+    if (formattedText.contains(',')) {
+      final numbers = formattedText.split(',');
       return numbers.map(_parseNumber).reduce((a, b) => a + b);
     }
 
-    return _parseNumber(text);
+    return _parseNumber(formattedText);
   }
 
   int _parseNumber(String text) {

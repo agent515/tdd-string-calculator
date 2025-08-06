@@ -53,5 +53,13 @@ void main() {
       expect(() => stringCalculator.add('23,42,-2,12'),
           throwsA(isA<ArgumentError>()));
     });
+
+    test(
+        'should return back the sum of multiple numbers when a new-line "\\n" are used interchangeably with commas',
+        () {
+      expect(stringCalculator.add('2\n3'), 5);
+      expect(stringCalculator.add('1\n2,3'), 1 + 2 + 3);
+      expect(stringCalculator.add('23,42\n2,12'), 23 + 42 + 2 + 12);
+    });
   });
 }
