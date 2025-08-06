@@ -7,6 +7,11 @@ class StringCalculatorImpl implements StringCalculator {
     if (text.isEmpty) {
       return 0;
     }
+
+    if (text.length == 1) {
+      return int.parse(text);
+    }
+
     return -1;
   }
 }
