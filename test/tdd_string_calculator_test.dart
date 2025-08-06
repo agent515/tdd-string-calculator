@@ -1,3 +1,4 @@
+import 'package:tdd_string_calculator/src/negative_argument_error.dart';
 import 'package:tdd_string_calculator/tdd_string_calculator.dart';
 import 'package:test/test.dart';
 
@@ -46,11 +47,12 @@ void main() {
     });
 
     test(
-        'should throw an Argument Error when a negative number is passed in a comma separated string',
+        'should throw an Negative Argument Error when a negative number is passed in a comma separated string',
         () {
-      expect(() => stringCalculator.add('2,-3'), throwsA(isA<ArgumentError>()));
+      expect(() => stringCalculator.add('2,-3'),
+          throwsA(isA<NegativeArgumentError>()));
       expect(() => stringCalculator.add('23,42,-2,12'),
-          throwsA(isA<ArgumentError>()));
+          throwsA(isA<NegativeArgumentError>()));
     });
 
     test(
@@ -75,6 +77,39 @@ void main() {
       expect(stringCalculator.add('//;\n1;2'), 1 + 2);
       expect(stringCalculator.add('//,\n1,2,3,'), 1 + 2 + 3);
       expect(stringCalculator.add('//|\n23|42|2|12|'), 23 + 42 + 2 + 12);
+    });
+
+    test(
+        'should throw an Negative Argument Error with all the negative numbers listed when a negative number is passed in a delimitter separated string',
+        () {
+      expect(
+          () => stringCalculator.add('//;\n-11;2'),
+          throwsA(
+            predicate(
+              (e) =>
+                  e is NegativeArgumentError &&
+                  e.message == 'Negative numbers are not allowed: -11',
+            ),
+          ));
+
+      expect(
+          () => stringCalculator.add('//,\n1,-2,-33,'),
+          throwsA(
+            predicate(
+              (e) =>
+                  e is NegativeArgumentError &&
+                  e.message == 'Negative numbers are not allowed: -2,-33',
+            ),
+          ));
+      expect(
+          () => stringCalculator.add('//|\n23|-42|2|-12|'),
+          throwsA(
+            predicate(
+              (e) =>
+                  e is NegativeArgumentError &&
+                  e.message == 'Negative numbers are not allowed: -42,-12',
+            ),
+          ));
     });
   });
 }

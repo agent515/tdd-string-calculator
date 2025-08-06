@@ -1,3 +1,5 @@
+import 'package:tdd_string_calculator/src/negative_argument_error.dart';
+
 abstract class StringCalculator {
   int add(String text);
 }
@@ -14,6 +16,13 @@ class StringCalculatorImpl implements StringCalculator {
 
     if (formattedText.contains(delimiter)) {
       final numbers = formattedText.split(delimiter);
+      List<String> negativeNumbers = [];
+
+      negativeNumbers = numbers.where(_isNegative).toList();
+      if (negativeNumbers.isNotEmpty) {
+        throw NegativeArgumentError(negativeNumbers);
+      }
+
       return numbers.map(_parseNumber).reduce((a, b) => a + b);
     }
 
@@ -30,7 +39,7 @@ class StringCalculatorImpl implements StringCalculator {
     }
 
     if (_isNegative(text)) {
-      throw ArgumentError('Negative numbers are not allowed: $text');
+      throw NegativeArgumentError([text]);
     }
     return int.parse(text);
   }
