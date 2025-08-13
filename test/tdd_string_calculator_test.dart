@@ -111,5 +111,13 @@ void main() {
             ),
           ));
     });
+
+    test(
+        "should return back the multiplication of the given numbers when a '*' delimiter is used by passing it on the first line",
+        () {
+      expect(stringCalculator.add('//\*\n1*2'), 1 * 2);
+      expect(stringCalculator.add('//\*\n1*2*3'), 1 * 2 * 3);
+      expect(stringCalculator.add('//\*\n23*42*2*12'), 23 * 42 * 2 * 12);
+    });
   });
 }

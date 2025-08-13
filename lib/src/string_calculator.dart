@@ -23,7 +23,9 @@ class StringCalculatorImpl implements StringCalculator {
         throw NegativeArgumentError(negativeNumbers);
       }
 
-      return numbers.map(_parseNumber).reduce((a, b) => a + b);
+      return numbers
+          .map(_parseNumber)
+          .reduce((a, b) => delimiter == '*' ? a * b : a + b);
     }
 
     return _parseNumber(formattedText);

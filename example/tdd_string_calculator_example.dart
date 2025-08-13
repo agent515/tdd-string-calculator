@@ -5,5 +5,6 @@ void main() {
   print(stringCalculator.add(''));
   print(stringCalculator.add('//|\n23|42|2|12|'));
   print(stringCalculator.add('\n23,32,12'));
+  print(stringCalculator.add('//\*\n4*5*2'));
   print(stringCalculator.add('//|\n23|-42|2|-12|'));
 }
